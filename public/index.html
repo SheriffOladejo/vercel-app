@@ -7,6 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AAVE V3 Info</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Your existing styles might be here */
+
+        .back-button-container {
+            padding: 10px;
+        }
+
+        .back-button {
+            background-color: #f0f0f0;
+            border: none;
+            color: #333;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
 </head>
 <body>
     <div class="mobile-container">
@@ -22,7 +44,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="back-button-container">
+            <button class="back-button" onclick="goBack()">← Back</button>
+        </div>
         <!-- Tabs -->
         <div class="tabs">
             <button class="tab active">Articles</button>
@@ -95,5 +119,12 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        // Your other script.js logic would still go here
+    </script>
 </body>
 </html>
