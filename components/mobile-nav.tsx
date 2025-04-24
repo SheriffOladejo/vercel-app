@@ -74,10 +74,8 @@ export default function MobileNav() {
               Platforms
             </Link>
             <Link
-              href="https://www.babypips.com/crypto/quizzes"
+              href="/index.html"
               className="text-gray-300 hover:text-white transition-colors py-3 border-b border-gray-800 text-lg"
-              target="_blank"
-              rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
             >
               Quiz

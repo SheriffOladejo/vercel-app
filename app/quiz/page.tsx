@@ -14,7 +14,7 @@ export default function QuizPage() {
 
         <div className="bg-gray-800/50 p-6 rounded-xl mb-8">
           <p className="mb-6">Ready to test your knowledge about cryptocurrencies and DeFi?</p>
-          <Link href="https://www.babypips.com/crypto/quizzes" target="_blank" rel="noopener noreferrer">
+          <Link href="/index.html">
             <Button className="bg-cyan-500 hover:bg-cyan-600 text-white">Start Quiz</Button>
           </Link>
         </div>

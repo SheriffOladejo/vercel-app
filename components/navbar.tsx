@@ -19,10 +19,8 @@ export default function Navbar() {
             Platforms
           </Link>
           <Link
-            href="https://www.babypips.com/crypto/quizzes"
+            href="/index.html"
             className="text-gray-300 hover:text-white transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
           >
             Quiz
           </Link>

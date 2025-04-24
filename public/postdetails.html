@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+    <link rel="stylesheet" href="postdetails.css">
+</head>
+<body>
+
+    <main class="container">
+        <div class="back-button" onclick="goBack()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back
+        </div>
+
+        <article class="post-details">
+            <div class="tag" id="post-tag">New Article</div>
+            <h1 id="post-title">Loading Post...</h1>
+            
+            <div class="post-meta">
+                <span class="author">By Blockchain Expert</span>
+                <span class="date" id="post-date">Loading date...</span>
+            </div>
+            
+            <img id="post-image" src="" alt="Post featured image" class="featured-image">
+            
+            <div id="post-content" class="post-content">
+                <p>Loading content...</p>
+            </div>
+            
+            <div class="actions">
+                <button class="share-button" onclick="sharePost()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                    Share
+                </button>
+            </div>
+            
+            <div class="related-posts">
+                <h3>Related Articles</h3>
+                <div class="related-grid" id="related-articles">
+                    <!-- Related articles will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        async function fetchPostDetails() {
+            const postId = new URLSearchParams(window.location.search).get('id');
+            
+            try {
+                const postResponse = await fetch(`https://mobiappave.xyz/api/article.php?id=${postId}`);
+                const post = await postResponse.json();
+
+                document.getElementById('post-title').textContent = post.data.title;
+                document.getElementById('post-tag').textContent = post.data.tag;
+                document.getElementById('post-image').src = post.data.imageUrl;
+                document.getElementById('post-image').alt = post.data.title;
+                document.getElementById('post-content').innerHTML = post.data.content;
+                document.getElementById('post-date').textContent = post.data.date;
+
+                if (post.data.related_posts) {
+                    const relatedIds = post.data.related_posts.split(',');
+                    const relatedResponse = await fetch(`https://mobiappave.xyz/api/getRelatedPosts.php?ids=${relatedIds.join(',')}`);
+                    const relatedPosts = await relatedResponse.json();
+                    
+                    const relatedContainer = document.getElementById('related-articles');
+                    relatedContainer.innerHTML = relatedPosts.map(relatedPost => `
+                        <div class="post-card">
+                            <img src="${relatedPost.image}" alt="${relatedPost.title}">
+                            <div class="post-info">
+                                <h4>${relatedPost.title}</h4>
+                                <a href="postdetails.html?id=${relatedPost.id}" class="read-more">Read more →</a>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading post:', error);
+                document.getElementById('post-title').textContent = 'Error loading post';
+                document.getElementById('post-content').innerHTML = '<p>Sorry, we couldn\'t load this post. Please try again later.</p>';
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function sharePost() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url)
+                .then(() => alert("Post link copied to clipboard!"))
+                .catch(() => alert("Failed to copy the link. Please try manually."));
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchPostDetails);
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAVE V3 Info</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="status-bar">
+            <div class="time"></div>
+            <div class="status-icons">
+                <div class="signal-icon"></div>
+                <div class="wifi-icon">
+                    
+                </div>
+                <div class="battery-icon">
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active">Articles</button>
+            <button class="tab">Quizzes</button>
+        </div>
+
+        <div id="quiz-container" class="quiz-container" style="display: none;">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <span id="current-question">1</span>/<span id="total-questions">0</span>
+                </div>
+                <div class="quiz-score">
+                    Score: <span id="current-score">0</span>
+                </div>
+            </div>
+            
+            <div class="quiz-question" id="quiz-question">
+                Loading question...
+            </div>
+            
+            <div class="quiz-options" id="quiz-options">
+                <div class="quiz-option" data-index="0">
+                    <span class="option-letter">A</span>
+                    <span class="option-text">Option 1</span>
+                </div>
+                <div class="quiz-option" data-index="1">
+                    <span class="option-letter">B</span>
+                    <span class="option-text">Option 2</span>
+                </div>
+                <div class="quiz-option" data-index="2">
+                    <span class="option-letter">C</span>
+                    <span class="option-text">Option 3</span>
+                </div>
+                <div class="quiz-option" data-index="3">
+                    <span class="option-letter">D</span>
+                    <span class="option-text">Option 4</span>
+                </div>
+            </div>
+            
+            <button id="next-question-btn" class="quiz-next-btn" disabled>Next Question</button>
+            
+            <div id="quiz-result" class="quiz-result" style="display: none;">
+                <h2>Quiz Completed!</h2>
+                <p>Your final score is: <span id="final-score">0</span>/<span id="final-total">0</span></p>
+                <button id="restart-quiz-btn" class="quiz-restart-btn">Restart Quiz</button>
+            </div>
+        </div>
+
+        <div id="results-container" style="display: none; padding: 20px;">
+            <h3>Results</h3>
+            <p id="score-display"></p>
+            <div id="answer-review"></div>
+        </div>
+          
+
+        <!-- Loading indicator -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading articles...</p>
+        </div>
+
+        <!-- Pagination info -->
+        <div id="pagination-info" class="pagination-info"></div>
+
+        <!-- Articles container -->
+        <div id="articles" class="articles"></div>
+
+        <!-- Pagination controls -->
+        <div id="pagination" class="pagination"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
